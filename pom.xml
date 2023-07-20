@@ -11,7 +11,6 @@
 	<groupId>com.qr.document.confia</groupId>
 	<artifactId>site</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
 	<name>site</name>
 	<description>Sitio web para visualizar información de los codigos QR generados en las solicitudes de documentos</description>
 	<properties>
