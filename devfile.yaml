@@ -22,7 +22,7 @@ components:
     image:
       imageName: java-springboot-image:latest
       dockerfile:
-        uri: docker/Dockerfile
+        uri: docker/Dockerfile.txt
         buildContext: .
         rootRequired: false
   - name: kubernetes-deploy
