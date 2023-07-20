@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
+	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+   	<meta http-equiv="Pragma" content="no-cache" />
+   	<meta http-equiv="Expires" content="0" />
+	<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline';">
+	<link rel="stylesheet" th:href="@{/css/style.css}"/>
+	<link rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
+	<link rel="shortcut icon" type="image/ico" th:href="@{/images/favicon.ico}"/>
+	<script th:src="@{/js/bootstrap.bundle.js}"></script>
+	<script type="text/javascript">
+		window.onload = function() {
+			document.getElementById("btnSalir").onclick = function() {
+		        location.href = "[[${@environment.getProperty('confia.site.url')}]]";
+		    }
+		}
+	</script>
+	<title>AFP Conf&iacute;a</title>
+</head>
+	<body>
+		<div th:if="${bit.isSuccess} == true">
+			<div class="container">
+				<div class="row row-no-gutters justify-content-evenly mt-4">
+					<div class="col-md-6 mb-5">
+					    <div class="col-auto card bg-white text-dark mx-auto">
+					    	<div class="card-header">
+					    		<img alt="Company Logo" th:src="@{../images/logo.png}" class="companyLogo img-fluid">
+					            <h1 class="h4 text-black text-center">Validaci&oacute;n del Carnet del Afiliado</h1>
+					            <p class="form-label fs-6 text-center">Carnet Emitido por AFP Conf&iacute;a para el Cliente:</p>
+				        	</div>
+					        <div class="card-body">
+					            <form>
+					            	<div class="form-group mb-2 row">
+					            		<label for="nombreCompleto" class="col-sm-4 col-form-label"><b>Nombre del Afiliado:</b></label>
+									    <div class="col-sm-8">
+									      	<input type="text" id="nombreCompleto" name="nombreCompleto" placeholder="Nombre del Afiliado" class="form-control" th:value="${bit.nombreCompleto}" disabled/>
+									    </div>
+									</div>
+									<div class="form-group mb-2 row">
+									    <label for="di" class="col-sm-4 col-form-label"><b>Documento de Identidad:</b></label>
+									    <div class="col-sm-8">
+									      	<input type="text" id="di" name="di" placeholder="Documento de Identidad" class="form-control" th:value="${bit.di}" disabled/>
+									    </div>
+									</div>
+					                <div class="form-group mb-2 row">
+					                    <label for="fechaIncorporacion" class="col-sm-4 col-form-label"><b>Fecha de Incorporaci&oacute;n al Sistema de Pensiones:</b></label>
+					                    <div class="col-sm-8">
+					                    	<input type="text" id="fechaIncorporacion" name="fechaIncorporacion" placeholder="Fecha de Incorporaci&oacute;n al Sistema de Pensiones" class="form-control" th:value="${bit.fechaIncorporacionSap}" disabled/>
+					                    </div>			                    
+					                </div>
+					                <div class="form-group mb-2 row">
+					                    <label for="fechaExpedicion" class="col-sm-4 col-form-label"><b>Fecha de Expedici&oacute;n del Carnet:</b></label>
+					                    <div class="col-sm-8">
+					                    	<input type="text" id="fechaExpedicion" name="fechaExpedicion" placeholder="Fecha de Expedici&oacute;n del Carnet" class="form-control" th:value="${bit.fechaExpedicion}" disabled/>
+					                    </div>   
+					                </div>
+					                <div class="form-group mb-2 row">
+					                    <label for="fechaExpiracion" class="col-sm-4 col-form-label"><b>Fecha de Expiraci&oacute;n del Carnet:</b></label>
+					                    <div class="col-sm-8">
+					                    	<input type="text" id="fechaExpiracion" name="fechaExpiracion" placeholder="Fecha de Expiraci&oacute;n del Carnet" class="form-control" th:value="${bit.fechaExpiracion}" disabled/>
+					                    </div>   
+					                </div>
+					                <div class="form-group mb-2 row">
+					                    <label for="colorCarne" class="col-sm-4 col-form-label"><b>Color del Carnet:</b></label>
+					                    <div class="col-sm-8">
+					                    	<input type="text" id="colorCarne" name="colorCarne" 
+					                    	th:style=
+					                    	"
+						                    	${bit.catFidelizacion} == 1 ? 'background-color: blue' : 
+						                    	(${bit.catFidelizacion} == 2 ? 'background-color: #D4AF37' : 
+						                    	(${bit.catFidelizacion} == 3 ? 'background-color: #C0C0C0' : 
+						                    	(${bit.catFidelizacion} == 4 ? 'background-color: orange' : 'background-color: green')))
+					                    	"
+					                    	placeholder="Color del Carnet" class="form-control text-white fw-bold" th:value="${bit.catDescripcion}" disabled/>
+					                    </div>   
+					                </div>
+					            </form>
+					        </div>
+					        <div class="card-footer text-center">
+					        	<p class="h5 text-black ">Este QR Tiene Lectura V&aacute;lida por un A&ntilde;o de su Fecha de Emisi&oacute;n.</p>
+					        	<button id="btnSalir" class="badge text-wrap" aria-label="Salir">Salir</button>
+					        </div>
+					    </div>
+			    	</div>
+				</div>
+			</div>
+		</div>
+		<div th:if="${bit.isSuccess} == false">
+			<div class="container">
+				<div class="row justify-content-evenly mt-5">
+					<div class="col-md-6 mb-5">
+						<div class="col-auto card bg-white text-dark">
+							<div class="card-header">
+					    		<img alt="Company Logo" th:src="@{../images/logo.png}" class="companyLogo">
+				        		<h1 class="h5 text-black text-center">Validaci&oacute;n del Carnet del Afiliado</h1>
+				        	</div>
+					        <div class="card-body">
+					        	<h1 class="h5 text-black text-center" th:text="${bit.message}"></h1>
+					        </div>
+					         <div class="card-footer text-center">
+					         	<button id="btnSalir" class="badge text-wrap" aria-label="Salir">Salir</button>
+					        </div>
+					    </div>
+					</div>
+		    	</div>
+			</div>
+		</div>
+		<footer class="footer-style text-center">
+	        <p>
+	            CONFÍA VIRTUAL Copyright <br>
+	            Derechos Reservados - El Salvador
+	        </p>
+    	</footer>
+	</body>
+</html>

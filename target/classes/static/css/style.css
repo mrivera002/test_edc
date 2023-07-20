@@ -1,0 +1,57 @@
+@charset "UTF-8";
+body {
+    background-image: url(../images/back-menu.png);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    min-height: 100vh;
+}
+
+html body {
+    font-family: 'Roboto',sans-serif !important;
+    background-color: #f3f3f4;
+    font-size: 13px;
+    color: #184890;
+    overflow-x: hidden;
+}
+
+img.companyLogo {
+    display: block;
+    margin: auto;
+    height: 100px;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+
+#btnSalir {
+    margin-left: 5px;
+    width: 50%;
+}
+
+#btnSalir {
+    margin: 0 auto;
+    width: 30%;
+    height: 50px;
+    background-color: #296ec6;
+    opacity: 1;
+    border-radius: 0.5rem;
+    border: none;
+    color: white;
+    font-size: 1.15em;
+    box-shadow: 0 0px 30px 0px #dae1f7;
+}
+
+/* footer */
+body footer.footer-style {
+    height: 80px;
+    background-color: #184890;
+    font-family: 'Roboto', sans-serif;
+    color: #fff;
+    font-size: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: sticky;
+    top: 100%;
+}

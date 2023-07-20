@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
+	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+   	<meta http-equiv="Pragma" content="no-cache" />
+   	<meta http-equiv="Expires" content="0" />
+	<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline';">
+	<link rel="stylesheet" th:href="@{/css/style.css}"/>
+	<link rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
+	<link rel="shortcut icon" type="image/ico" th:href="@{/images/favicon.ico}"/>
+	<script th:src="@{/js/bootstrap.bundle.js}"></script>
+	<script type="text/javascript">
+		window.onload = function() {
+			document.getElementById("btnSalir").onclick = function() {
+		        location.href = "[[${@environment.getProperty('confia.site.url')}]]";
+		    }
+		}
+	</script>
+	<title>AFP Conf&iacute;a</title>
+</head>
+	<body>
+		<div th:if="${bit.isSuccess} == true">
+			<div class="container">
+				<div class="row row-no-gutters justify-content-evenly mt-4">
+					<div class="col-md-5 mb-5">
+					    <div class="col-auto card bg-white text-dark mx-auto">
+					    	<div class="card-header">
+					    		<img alt="Company Logo" th:src="@{../images/logo.png}" class="companyLogo img-fluid">
+					            <h1 class="h4 text-black text-center">Validaci&oacute;n de Estado de Cuenta del Afiliado</h1>
+					            <p class="form-label fs-6 text-center">Estado de cuenta generado por AFP Confia para el cliente:</p>
+				        	</div>
+					        <div class="card-body">
+					            <form>
+					            	<div class="form-group mb-2 row">
+					            		<label for="di" class="col-sm-4 col-form-label"><b>Identificaci&oacute;n:</b></label>
+									    <div class="col-sm-8">
+									      	<input type="text" id="di" name="di" placeholder="Identificaci&oacute;n" class="form-control" th:value="${bit.di}" disabled/>
+									    </div>
+									</div>
+									<div class="form-group mb-2 row">
+									    <label for="fecha_emision" class="col-sm-4 col-form-label"><b>Fecha Emisi&oacute;n:</b></label>
+									    <div class="col-sm-8">
+									      	<input type="text" id="fecha_emision" name="fecha_emision" placeholder="Fecha emisi&oacute;n" class="form-control" th:value="${bit.fechaEmision}" disabled/>
+									    </div>
+									</div>
+					                <div class="form-group mb-2 row">
+					                    <label for="periodo" class="col-sm-4 col-form-label"><b>Periodo Generado:</b></label>
+					                    <div class="col-sm-8">
+					                    	<input type="text" id="periodo" name="periodo" placeholder="Periodo Generado" class="form-control" th:value="${bit.periodoInicial + ' al ' + bit.periodoFinal}" disabled/>
+					                    </div>			                    
+					                </div>
+					                <div class="form-group mb-2 row">
+					                    <label for="meses" class="col-sm-4 col-form-label"><b>Meses Cotizados:</b></label>
+					                    <div class="col-sm-8">
+					                    	<input type="text" id="meses" name="meses" placeholder="Meses Cotizados" class="form-control" th:value="${bit.cantidadPeriodos}" disabled/>
+					                    </div>   
+					                </div>
+					                <div class="form-group mb-2 row">
+					                    <label for="promedio" class="col-sm-4 col-form-label"><b>Promedio Salario Meses Cotizados:</b></label>
+					                    <div class="col-sm-8">
+					                    	<div class="input-group">
+					                    		<div class="input-group-prepend">
+	          										<span class="input-group-text" id="inputGroupPrepend">$</span>
+	        									</div>
+					                    		<input type="text" id="promedio" name="promedio" placeholder="Promedio Salario Meses Cotizados" class="form-control" th:value="${#numbers.formatDecimal(bit.promedioIbc, 0, 'COMMA', 2, 'POINT')}" disabled/>
+					                    	</div>
+					                    </div>		                    
+					                </div>
+					                <div class="form-group mb-2 row">
+					                    <label for="saldoIni" class="col-sm-4 col-form-label"><b>Saldo Inicial:</b></label>
+					                    <div class="col-sm-8">
+					                    	<div class="input-group">
+					                    		<div class="input-group-prepend">
+	          										<span class="input-group-text" id="inputGroupPrepend">$</span>
+	        									</div>
+					                    		<input type="text" id="saldoIni" name="saldoIni" placeholder="Saldo Inicial" class="form-control" th:value="${#numbers.formatDecimal(bit.saldoInicial, 0, 'COMMA', 2, 'POINT')}" disabled/>	
+					                    	</div>					                    	
+					                    </div>
+					                </div>
+					                <div class="form-group mb-2 row">
+					                    <label for="saldoAct" class="col-sm-4 col-form-label"><b>Saldo Actual:</b></label>
+					                    <div class="col-sm-8">
+					                    	<div class="input-group">
+					                    		<div class="input-group-prepend">
+	          										<span class="input-group-text" id="inputGroupPrepend">$</span>
+	        									</div>
+					                    		<input type="text" id="saldoAct" name="saldoAct" placeholder="Saldo Actual" class="form-control" th:value="${#numbers.formatDecimal(bit.saldoActual, 0, 'COMMA', 2, 'POINT')}" disabled/>
+					                    	</div>				                    	
+					                    </div>
+					                </div>
+					            </form>
+					        </div>
+					        <div class="card-footer text-center">
+					        	<p class="h5 text-black ">Vigencia de lectura un a&ntilde;o desde su emisi&oacute;n.</p>
+					        	<button id="btnSalir" class="badge text-wrap" aria-label="Salir">Salir</button>
+					        </div>
+					    </div>
+			    	</div>
+				</div>
+			</div>
+		</div>
+		<div th:if="${bit.isSuccess} == false">
+			<div class="container">
+				<div class="row justify-content-evenly mt-5">
+					<div class="col-md-6 mb-5">
+						<div class="col-auto card bg-white text-dark">
+							<div class="card-header">
+					    		<img alt="Company Logo" th:src="@{../images/logo.png}" class="companyLogo">
+				        		<h1 class="h5 text-black text-center">Validaci&oacute;n de Estado de Cuenta del Afiliado</h1>
+				        	</div>
+					        <div class="card-body">
+					        	<h1 class="h5 text-black text-center" th:text="${bit.message}"></h1>
+					        </div>
+					         <div class="card-footer text-center">
+					         	<button id="btnSalir" class="badge text-wrap" aria-label="Salir">Salir</button>
+					        </div>
+					    </div>
+					</div>
+		    	</div>
+			</div>
+		</div>
+		<footer class="footer-style text-center">
+	        <p>
+	            CONFÍA VIRTUAL Copyright <br>
+	            Derechos Reservados - El Salvador
+	        </p>
+    	</footer>
+	</body>
+</html>
